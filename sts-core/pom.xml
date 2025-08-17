@@ -27,5 +27,10 @@
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-core</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.ttzero</groupId>
+            <artifactId>eec</artifactId>
+        </dependency>
     </dependencies>
 </project>

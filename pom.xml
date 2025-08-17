@@ -23,6 +23,7 @@
         <log4j2.version>2.25.0</log4j2.version>
         <fastcsv.version>2.2.2</fastcsv.version>
         <hutool.version>5.8.38</hutool.version>
+        <eec.version>0.5.24</eec.version>
     </properties>
 
     <dependencyManagement>
@@ -59,6 +60,12 @@
                 <type>pom</type>
                 <!-- 注意这里是import -->
                 <scope>import</scope>
+            </dependency>
+            <!--excel-->
+            <dependency>
+                <groupId>org.ttzero</groupId>
+                <artifactId>eec</artifactId>
+                <version>${eec.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -1,14 +1,9 @@
-2025-08-16 21:02:08 [INFO ] [main] - header: [D:\JavaSpace\sts\sts-core\src\main\resources\test.csv]
-2025-08-16 21:02:08 [INFO ] [main] - csvReader closed
-2025-08-16 21:03:16 [INFO ] [main] - header: [D:\JavaSpace\sts\sts-core\src\main\resources\test.csv]
-2025-08-16 21:03:16 [INFO ] [main] - csvReader closed
-2025-08-16 21:04:40 [INFO ] [main] - header: [D:\JavaSpace\sts\sts-core\src\main\resources\test.csv]
-2025-08-16 21:04:40 [INFO ] [main] - csvReader closed
-2025-08-16 21:04:46 [INFO ] [main] - header: [D:\JavaSpace\sts\sts-core\src\main\resources\test.csv]
-2025-08-16 21:04:46 [INFO ] [main] - csvReader closed
-2025-08-16 21:12:45 [INFO ] [main] - header: [D:\JavaSpace\sts\sts-core\src\main\resources\test.csv]
-2025-08-16 21:12:45 [INFO ] [main] - csvReader closed
-2025-08-16 21:14:18 [INFO ] [main] - header: [a, b, c]
-2025-08-16 21:14:18 [INFO ] [main] - data: [1, 2, 3]
-2025-08-16 21:14:18 [INFO ] [main] - data: [1, 2, 3,4]
-2025-08-16 21:14:18 [INFO ] [main] - csvReader closed
+2025-08-17 12:01:23 [INFO ] [main] - 构建ExcelReader失败
+2025-08-17 12:01:38 [WARN ] [main] - /xl/sharedlinks.xml is configured in [Content_Types].xml, but the corresponding file is missing.
+2025-08-17 12:01:38 [INFO ] [main] - header: [a, b, c]
+2025-08-17 12:01:38 [WARN ] [main] - /xl/sharedlinks.xml is configured in [Content_Types].xml, but the corresponding file is missing.
+2025-08-17 12:01:38 [INFO ] [main] - data: [1, 2, 3]
+2025-08-17 12:07:57 [WARN ] [main] - /xl/sharedlinks.xml is configured in [Content_Types].xml, but the corresponding file is missing.
+2025-08-17 12:08:11 [INFO ] [main] - header: [a, b, c]
+2025-08-17 12:08:11 [WARN ] [main] - /xl/sharedlinks.xml is configured in [Content_Types].xml, but the corresponding file is missing.
+2025-08-17 12:08:11 [INFO ] [main] - data: [1, 2, 3]
