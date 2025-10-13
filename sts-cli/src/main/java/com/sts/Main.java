@@ -3,8 +3,10 @@ package com.sts;
 import com.sts.source.StsSource;
 import com.sts.source.impl.CsvSourceImpl;
 import com.sts.source.impl.ExcelSourceImpl;
+import com.sts.source.impl.TextSourceImpl;
 import com.sts.source.model.CsvSourceConfig;
 import com.sts.source.model.ExcelSourceConfig;
+import com.sts.source.model.TextSourceConfig;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
@@ -17,7 +19,16 @@ import java.util.stream.Collectors;
 @Slf4j
 public class Main {
     public static void main(String[] args) {
-        testExcel();
+        testText();
+    }
+
+    public static void testText() {
+        TextSourceConfig textSourceConfig = new TextSourceConfig("D:\\JavaSpace\\sts\\sts-core\\src\\main\\resources\\test.csv");
+        try(StsSource stsSource = new TextSourceImpl(textSourceConfig)){
+            printHeaderAndData(stsSource);
+        }catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static void testCsv() {
