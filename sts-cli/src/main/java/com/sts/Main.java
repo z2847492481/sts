@@ -3,11 +3,15 @@ package com.sts;
 import com.sts.source.StsSource;
 import com.sts.source.impl.CsvSourceImpl;
 import com.sts.source.impl.ExcelSourceImpl;
+import com.sts.source.impl.JdbcSourceImpl;
 import com.sts.source.impl.TextSourceImpl;
 import com.sts.source.model.CsvSourceConfig;
 import com.sts.source.model.ExcelSourceConfig;
+import com.sts.source.model.JdbcSourceConfig;
 import com.sts.source.model.TextSourceConfig;
 import lombok.extern.slf4j.Slf4j;
+import org.stone.beecp.BeeDataSource;
+import org.stone.beecp.BeeDataSourceConfig;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,7 +23,25 @@ import java.util.stream.Collectors;
 @Slf4j
 public class Main {
     public static void main(String[] args) {
-        testText();
+        testJDBC();
+    }
+
+    public static void testJDBC() {
+        BeeDataSourceConfig beeDataSourceConfig = new BeeDataSourceConfig();
+        beeDataSourceConfig.setJdbcUrl("jdbc:mysql://192.168.10.110:3306/zhq-gateway");
+        beeDataSourceConfig.setUsername("root");
+        beeDataSourceConfig.setPassword("root");
+        beeDataSourceConfig.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        BeeDataSource beeDataSource = new BeeDataSource(beeDataSourceConfig);
+        JdbcSourceConfig jdbcSourceConfig = new JdbcSourceConfig(beeDataSource, "select * from application_interface", Integer.MIN_VALUE);
+        try (StsSource stsSource = new JdbcSourceImpl(jdbcSourceConfig)) {
+            printHeaderAndData(stsSource);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            beeDataSource.close();
+        }
+
     }
 
     public static void testText() {
