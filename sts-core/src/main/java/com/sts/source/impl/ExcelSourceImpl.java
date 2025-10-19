@@ -5,6 +5,7 @@ import com.sts.source.StsSource;
 import com.sts.source.model.ExcelSourceConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.ttzero.excel.reader.ExcelReader;
+import org.ttzero.excel.reader.Row;
 import org.ttzero.excel.reader.Sheet;
 
 import java.nio.file.Paths;
@@ -33,6 +34,9 @@ public class ExcelSourceImpl implements StsSource {
 
     @Override
     public List<String> getHeader() {
+        if (!excelSourceConfig.isHasHeader()) {
+            return excelSourceConfig.getHeaderList();
+        }
         try(ExcelReader reader = buildExcelReader()) {
             return getSheet(reader)
                     .getHeader()
@@ -56,8 +60,13 @@ public class ExcelSourceImpl implements StsSource {
 
     @Override
     public Stream<List<String>> getDataStream() {
-        return getSheet(buildExcelReader())
-                .dataRows()
+        ExcelReader reader = buildExcelReader();
+        Stream<Row> stream = getSheet(reader)
+                .dataRows();
+        if (excelSourceConfig.isHasHeader()) {
+            stream = stream.skip(1);
+        }
+        return stream
                 .filter(Objects::nonNull)
                 .map(row -> row.toMap().values().stream().map(this::getCellValue).collect(Collectors.toList()));
     }

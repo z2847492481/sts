@@ -29,6 +29,11 @@ public class TextSourceImpl implements StsSource {
 
     @Override
     public List<String> getHeader() {
+
+        if (!textSourceConfig.isHasHeader()) {
+            return textSourceConfig.getHeaderList();
+        }
+
         try(Stream<String> reader = buildTextReader()) {
             String firstLine = reader.findFirst().orElseThrow(() -> new RuntimeException("文件为空"));
             return StrUtil.split(firstLine, textSourceConfig.getFieldSeparator());
@@ -38,8 +43,10 @@ public class TextSourceImpl implements StsSource {
     @Override
     public Stream<List<String>> getDataStream() {
         textReader = buildTextReader();
-        return textReader.skip(1)
-                .map(line -> StrUtil.split(line, textSourceConfig.getFieldSeparator()));
+        if (textSourceConfig.isHasHeader()) {
+            textReader = textReader.skip(1);
+        }
+        return textReader.map(line -> StrUtil.split(line, textSourceConfig.getFieldSeparator()));
     }
 
     @Override

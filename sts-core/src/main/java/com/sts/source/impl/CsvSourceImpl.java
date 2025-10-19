@@ -43,6 +43,9 @@ public class CsvSourceImpl implements StsSource {
 
     @Override
     public List<String> getHeader() {
+        if (!csvSourceConfig.isHasHeader()) {
+            return csvSourceConfig.getHeaderList();
+        }
         try(CsvReader reader = buildCsvReader()){
             return reader
                     .stream()
@@ -57,9 +60,11 @@ public class CsvSourceImpl implements StsSource {
     @Override
     public Stream<List<String>> getDataStream() {
         csvReader = buildCsvReader();
-        return csvReader.stream()
-                .skip(1)
-                .map(CsvRow::getFields);
+        Stream<CsvRow> stream = csvReader.stream();
+        if (csvSourceConfig.isHasHeader()) {
+            stream = stream.skip(1);
+        }
+        return stream.map(CsvRow::getFields);
     }
 
     @Override
