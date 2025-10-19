@@ -1,5 +1,7 @@
 package com.sts.source.model;
 
+import com.sts.source.StsSource;
+import com.sts.source.impl.CsvSourceImpl;
 import lombok.*;
 
 /**
@@ -9,7 +11,7 @@ import lombok.*;
 
 @Getter
 @AllArgsConstructor
-public class CsvSourceConfig {
+public class CsvSourceConfig extends BaseSourceConfig{
 
     /**
      * 是否跳过空行
@@ -35,5 +37,10 @@ public class CsvSourceConfig {
 
     public CsvSourceConfig(String filePath) {
         this.filePath = filePath;
+    }
+
+    @Override
+    public StsSource buildImpl() {
+        return new CsvSourceImpl(this);
     }
 }

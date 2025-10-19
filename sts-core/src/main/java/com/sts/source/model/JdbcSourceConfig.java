@@ -1,5 +1,7 @@
 package com.sts.source.model;
 
+import com.sts.source.StsSource;
+import com.sts.source.impl.JdbcSourceImpl;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +15,7 @@ import javax.sql.DataSource;
 @Getter
 @Setter
 @AllArgsConstructor
-public class JdbcSourceConfig {
+public class JdbcSourceConfig extends BaseSourceConfig{
 
     private DataSource dataSource;
     private String selectSql;
@@ -22,5 +24,10 @@ public class JdbcSourceConfig {
     public JdbcSourceConfig(DataSource dataSource, String selectSql) {
         this.dataSource = dataSource;
         this.selectSql = selectSql;
+    }
+
+    @Override
+    public StsSource buildImpl() {
+        return new JdbcSourceImpl(this);
     }
 }

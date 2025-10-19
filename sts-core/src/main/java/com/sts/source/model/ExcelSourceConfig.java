@@ -1,5 +1,7 @@
 package com.sts.source.model;
 
+import com.sts.source.StsSource;
+import com.sts.source.impl.ExcelSourceImpl;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -9,7 +11,7 @@ import lombok.Getter;
  **/
 
 @Getter
-public class ExcelSourceConfig {
+public class ExcelSourceConfig extends BaseSourceConfig{
 
     /**
      * 文件路径
@@ -28,5 +30,10 @@ public class ExcelSourceConfig {
     public ExcelSourceConfig(String filePath, String sheetName) {
         this.filePath = filePath;
         this.sheetName = sheetName;
+    }
+
+    @Override
+    public StsSource buildImpl() {
+        return new ExcelSourceImpl(this);
     }
 }
