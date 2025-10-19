@@ -26,6 +26,11 @@ public class JdbcSourceImpl implements StsSource {
 
     @Override
     public List<String> getHeader() {
+
+        if (!jdbcSourceConfig.isHasHeader()) {
+            return jdbcSourceConfig.getHeaderList();
+        }
+
         Connection connection = null;
         try {
             connection = jdbcSourceConfig.getDataSource().getConnection();
